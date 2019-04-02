@@ -16,7 +16,17 @@ namespace DeliveryPizzaRequest.Controllers
          */
         public IEnumerable<DeliveryRequest> Get()
         {
-            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Content\DeliveryRequest.txt");
+            //string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Content\DeliveryRequest.txt");
+            string rootPath;
+            if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("HOME")))
+                rootPath = Environment.GetEnvironmentVariable("HOME") + "\\site\\wwwroot\\bin";
+            else if (HttpContext.Current != null)
+                rootPath = HttpContext.Current.Server.MapPath("~");
+            else
+                rootPath = ".";
+            string path = rootPath + "\\Content\\DeliveryRequest.txt";
+            System.Console.WriteLine("path: " + path);
+
             string[] fileLines = File.ReadAllLines(path);
             List<DeliveryRequest> requestList = new List<DeliveryRequest>();
             for (int i = 1; i < fileLines.Length; i++)
@@ -42,7 +52,15 @@ namespace DeliveryPizzaRequest.Controllers
         // GET: api/DeliveryRequest/5
         public DeliveryRequest Get(int id)
         {
-            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Content\DeliveryRequest.txt");
+            //string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Content\DeliveryRequest.txt");
+            string rootPath;
+            if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("HOME")))
+                rootPath = Environment.GetEnvironmentVariable("HOME") + "\\site\\wwwroot\\bin";
+            else if (HttpContext.Current != null)
+                rootPath = HttpContext.Current.Server.MapPath("~");
+            else
+                rootPath = ".";
+            string path = rootPath + "\\Content\\DeliveryRequest.txt";
             string[] fileLines = File.ReadAllLines(path);
             DeliveryRequest deliveryRequest = new DeliveryRequest();
             for (int i = 1; i < fileLines.Length; i++)
@@ -67,7 +85,15 @@ namespace DeliveryPizzaRequest.Controllers
         public void Post(DeliveryRequest value)
         {
             //Delivery Request Input
-            string deliveryRequestpath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Content\DeliveryRequest.txt");
+            //string deliveryRequestpath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Content\DeliveryRequest.txt");
+            string rootPath;
+            if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("HOME")))
+                rootPath = Environment.GetEnvironmentVariable("HOME") + "\\site\\wwwroot\\bin";
+            else if (HttpContext.Current != null)
+                rootPath = HttpContext.Current.Server.MapPath("~");
+            else
+                rootPath = ".";
+            string deliveryRequestpath = rootPath + "\\Content\\DeliveryRequest.txt";
             deliveryRequestId++;
             string newDeliveryRequestLine = string.Format("{0}|{1}|{2}|{3}|{4}|{5}",
                 deliveryRequestId,
@@ -80,7 +106,8 @@ namespace DeliveryPizzaRequest.Controllers
             File.AppendAllText(deliveryRequestpath, newDeliveryRequestLine);
 
             //Delivery Request Client
-            string requestClientpath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Content\RequestClient.txt");
+            //string requestClientpath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Content\RequestClient.txt");
+            string requestClientpath = rootPath + "\\Content\\RequestClient.txt";
             string newRequestClientLine = string.Format("{0}|{1}|{2}|{3}|{4}|{5}",
                 value.RequestClient.Code,
                 value.RequestClient.Name,
@@ -92,7 +119,8 @@ namespace DeliveryPizzaRequest.Controllers
             File.AppendAllText(requestClientpath, newRequestClientLine);
 
             //Delivery Request detail
-            string requestDetailpath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Content\RequestDetail.txt");
+            //string requestDetailpath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Content\RequestDetail.txt");
+            string requestDetailpath = rootPath + "\\Content\\RequestDetail.txt";
             string newRequestDetailLine = string.Format("{0}|{1}|{2}|{3}|{4}|{5}",
                 value.RequestDetail.Code,
                 value.RequestDetail.Flavor1,
@@ -106,7 +134,8 @@ namespace DeliveryPizzaRequest.Controllers
             File.AppendAllText(requestDetailpath, newRequestDetailLine);
 
             //Delivery Delivery Man
-            string deliveryManpath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Content\DeliveryMan.txt");
+            //string deliveryManpath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Content\DeliveryMan.txt");
+            string deliveryManpath = rootPath + "\\Content\\DeliveryMan.txt";
             string newDeliveryManLine = string.Format("{0}|{1}|{2}|{3}|{4}|{5}",
                 value.DeliveryMan.Code,
                 value.DeliveryMan.Name,
@@ -131,7 +160,15 @@ namespace DeliveryPizzaRequest.Controllers
 
         private DeliveryMan GetDeliveryManDetails(string code)
         {
-            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Content\DeliveryMan.txt");
+            //string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Content\DeliveryMan.txt");
+            string rootPath;
+            if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("HOME")))
+                rootPath = Environment.GetEnvironmentVariable("HOME") + "\\site\\wwwroot\\bin";
+            else if (HttpContext.Current != null)
+                rootPath = HttpContext.Current.Server.MapPath("~");
+            else
+                rootPath = ".";
+            string path = rootPath + "\\Content\\DeliveryMan.txt";
             string[] fileLines = File.ReadAllLines(path);
             DeliveryMan deliveryMan = null;
 
@@ -157,7 +194,15 @@ namespace DeliveryPizzaRequest.Controllers
 
         private RequestDetail GetRequestDetails(string code)
         {
-            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Content\RequestDetail.txt");
+            string rootPath;
+            if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("HOME")))
+                rootPath = Environment.GetEnvironmentVariable("HOME") + "\\site\\wwwroot\\bin";
+            else if (HttpContext.Current != null)
+                rootPath = HttpContext.Current.Server.MapPath("~");
+            else
+                rootPath = ".";
+            string path = rootPath + "\\Content\\RequestDetail.txt";
+            //string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Content\RequestDetail.txt");
             string[] fileLines = File.ReadAllLines(path);
             RequestDetail requestDetail = null;
 
@@ -184,7 +229,16 @@ namespace DeliveryPizzaRequest.Controllers
 
         private RequestClient GetRequestClientInfo(string code)
         {
-            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Content\RequestClient.txt");
+            //string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Content\RequestClient.txt");
+            string rootPath;
+            if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("HOME")))
+                rootPath = Environment.GetEnvironmentVariable("HOME") + "\\site\\wwwroot\\bin";
+            else if (HttpContext.Current != null)
+                rootPath = HttpContext.Current.Server.MapPath("~");
+            else
+                rootPath = ".";
+            string path = rootPath + "\\Content\\RequestClient.txt";
+
             string[] fileLines = File.ReadAllLines(path);
             RequestClient requestClient = null;
 
