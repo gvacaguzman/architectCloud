@@ -1,0 +1,6 @@
+﻿CODE|FLAVOR1|FLAVOR2|FLAVOR|FLAVOR4|SIZE|OTHER_INFO|PRICE
+de-001|hawaiana|americana|hawaiana|americana|familiar||60.00
+de-002|hongos|americana|hawaiana|americana|personal|extra queso|30.00
+de-003|hawaiana|vegetariana|hongos|americana|familiar||60.00
+de-004|hongos|pique|criolla|americana|familiar||60.00
+de-005|pique|americana|hawaiana|pique|interminable||250.00
