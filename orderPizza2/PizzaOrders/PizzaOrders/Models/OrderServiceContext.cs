@@ -25,8 +25,18 @@ namespace PizzaOrders.Models
          */
         public IEnumerable<Order> Get()
         {
-            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Content\Orders.txt");
+            string rootPath;
+            if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("HOME")))
+                rootPath = Environment.GetEnvironmentVariable("HOME") + "\\site\\wwwroot\\bin";
+            else if (HttpContext.Current != null)
+                rootPath = HttpContext.Current.Server.MapPath("~");
+            else
+                rootPath = ".";
+            string path = rootPath + "\\Content\\Orders.txt";
+            System.Console.WriteLine("path: " + path);
+
             string[] fileLines = File.ReadAllLines(path);
+            
             List<Order> requestList = new List<Order>();
             for (int i = 1; i < fileLines.Length; i++)
             {
